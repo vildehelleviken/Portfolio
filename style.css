@@ -1,0 +1,917 @@
+/* ==========================================================================
+   PORTEFØLJE — delt stilark
+   Fargepalett, typografi og layout er beskrevet i README.md
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap');
+
+:root {
+  /* Farger — hentet fra tegneark/blueprint-verdenen */
+  --paper: #FFFFFF;         /* ren hvit bakgrunn */
+  --paper-dim: #F5F5F5;     /* lett grå, til hover/felt */
+  --ink: #1B1B18;           /* nesten-svart, som tusj på papir */
+  --ink-soft: #55524A;      /* dempet tekstfarge, til brødtekst/metadata */
+  --line: #DEDEDA;          /* hårfin linje, som blyantstrek */
+  --blue: #223349;          /* blueprint-blå aksent */
+  --blue-soft: #445872;
+
+  --font-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+
+  --max-width: 1180px;
+  --edge: 28px; /* avstand til "arkkant" — brukes til rammen rundt siden */
+  --sidebar-width: 240px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+}
+
+/* Sidebar / navigasjon (venstre side) ------------------------------------ */
+aside.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  padding: 40px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  border-right: 1px solid var(--line);
+  background: var(--paper);
+  z-index: 30;
+  overflow-y: auto;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 1.3;
+}
+
+nav.site-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+nav.site-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  width: fit-content;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav.site-nav a:hover,
+nav.site-nav a.active {
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Underoverskrifter — de fire prosjektene, alltid synlige under "Prosjekter" */
+.sub-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-left: 14px;
+  border-left: 1px solid var(--line);
+  margin-top: -2px;
+}
+
+.sub-nav a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+  border-bottom: none;
+}
+.sub-nav a:hover,
+.sub-nav a.active {
+  color: var(--blue);
+}
+
+/* Kontaktinfo nederst i sidebaren */
+.sidebar-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-contact a {
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.sidebar-contact a:hover {
+  color: var(--blue);
+}
+
+/* Innholdet flyttes til høyre for sidebaren */
+.main-content {
+  margin-left: var(--sidebar-width);
+}
+
+@media (max-width: 760px) {
+  aside.sidebar {
+    position: static;
+    width: auto;
+    flex-direction: column;
+    gap: 24px;
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding: 24px var(--edge);
+  }
+  .sidebar-top {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 24px;
+  }
+  nav.site-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .nav-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+  }
+  .sub-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-left: 14px;
+    border-left: 1px solid var(--line);
+    margin-top: 0;
+  }
+  .sidebar-contact {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+/* Hero ------------------------------------------------------------------ */
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 64px var(--edge) 56px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 18px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(34px, 5.2vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+  max-width: 14ch;
+}
+
+.hero p {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 52ch;
+  margin: 0;
+}
+
+/* Prosjekt-grid («arkindeks») -------------------------------------------- */
+.index-label {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 8px;
+}
+
+.project-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8px var(--edge) 60px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+}
+
+.project-card {
+  background: transparent;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card figure {
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--paper-dim);
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(15%);
+  transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.03);
+  filter: grayscale(0%);
+}
+
+/* Tittelblokk under bildet, som på et tegningsark */
+.project-card figcaption {
+  padding: 16px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pc-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.pc-meta {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+.pc-code {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--blue);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* Om-side / brødtekst-seksjoner ----------------------------------------- */
+.prose {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px var(--edge) 60px;
+}
+
+.prose h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 4vw, 40px);
+  margin-bottom: 24px;
+  max-width: 16ch;
+}
+
+.prose p {
+  max-width: 60ch;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.prose p strong { color: var(--ink); font-weight: 500; }
+
+/* Om-siden ------------------------------------------------------------------ */
+
+/* Introseksjon: portrett til venstre, navn/rolle/tekst til høyre */
+.about-intro {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 56px var(--edge) 48px;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 52px;
+  align-items: start;
+}
+
+.about-photo img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  background: var(--paper-dim);
+}
+
+.about-intro-text h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 0 0 8px;
+  line-height: 1.1;
+}
+
+.about-role {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 24px;
+}
+
+.about-intro-text p:not(.about-role) {
+  max-width: 56ch;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .about-intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .about-photo img {
+    max-width: 220px;
+  }
+}
+
+/* Generisk seksjon under introen: Personalia, Utdanning, Erfaring, osv. */
+.about-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px var(--edge);
+  border-top: 1px solid var(--line);
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 28px;
+}
+
+.about-section-text {
+  color: var(--ink-soft);
+  font-size: 16px;
+  max-width: 60ch;
+}
+
+/* Personalia */
+.personalia-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 320px));
+  gap: 24px 48px;
+}
+
+.personalia-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.personalia-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.personalia-value {
+  font-size: 16px;
+  color: var(--ink);
+  text-decoration: none;
+}
+a.personalia-value:hover { color: var(--blue); }
+
+@media (max-width: 520px) {
+  .personalia-grid { grid-template-columns: 1fr; }
+}
+
+/* Tidslinje — brukes for både Utdanning og Erfaring */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+}
+
+.timeline-date {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  padding-top: 3px;
+}
+
+.timeline-content h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.timeline-subtitle {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.timeline-description {
+  font-size: 15px;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: 10px 0 0;
+}
+
+@media (max-width: 560px) {
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+/* Prosjekt-detaljside ----------------------------------------------------- */
+
+/* Stort toppbilde — samme bilde som vises på forsiden */
+.project-hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--edge);
+}
+
+.project-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px var(--edge) 30px;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-header .pc-code { display: block; margin-bottom: 10px; }
+
+.project-header h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 5vw, 46px);
+  margin: 0 0 16px;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-row span b {
+  display: block;
+  color: var(--ink);
+  font-family: var(--font-body);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+.project-body {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px var(--edge) 20px;
+}
+
+.project-body p {
+  max-width: 60ch;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   BILDESEKSJON
+   Alle bilder holder samme bredde (hele innholdsbredden) og varierer kun
+   i høyden, ut fra bildets naturlige format — det holder siden ryddig.
+
+   Tre byggeklosser du kan kombinere fritt, i hvilken som helst rekkefølge:
+
+   1. Enkeltbilde, full bredde:
+        <figure class="gallery-figure"> ... </figure>
+
+   2. To bilder side ved side — pakk to <figure class="gallery-figure">
+      inn i en rad:
+        <div class="gallery-row"> <figure>...</figure> <figure>...</figure> </div>
+
+   3. Bilde med lengre beskrivende tekst under — legg til
+      klassen "gallery-figure--described" og en <p class="gallery-description">
+      etter bildeteksten.
+
+   Se prosjekt-1.html for eksempler på alle tre.
+   -------------------------------------------------------------------------- */
+.project-gallery {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px var(--edge) 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.gallery-figure {
+  margin: 0;
+}
+
+.gallery-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Bildetekst — kort, under hvert bilde */
+.gallery-figure figcaption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+}
+
+/* Lengre beskrivende tekst, for bilder som trenger mer forklaring */
+.gallery-description {
+  margin-top: 14px;
+  max-width: 60ch;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+/* To bilder side ved side */
+.gallery-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.gallery-row .gallery-figure img {
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .gallery-row {
+    grid-template-columns: 1fr;
+  }
+  .gallery-row .gallery-figure img {
+    height: auto;
+    object-fit: initial;
+  }
+}
+
+.back-link {
+  display: inline-block;
+  margin: 40px var(--edge) 0;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  text-decoration: none;
+}
+.back-link:hover { text-decoration: underline; }
+
+
+/* Tre bilder side ved side */
+.gallery-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+
+.gallery-row-3 .gallery-figure img {
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .gallery-row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .gallery-row-3 {
+    grid-template-columns: 1fr;
+  }
+  .gallery-row-3 .gallery-figure img {
+    height: auto;
+    object-fit: initial;
+  }
+}
+
+/* --------------------------------------------------------- */
+
+.gallery-strict {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 24px;
+  height: 21cm;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.gallery-strict-main {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
+}
+
+.gallery-strict-main img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.gallery-strict-quad {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.gallery-strict-quad .quad-images {
+  display: flex;
+  gap: 12px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.gallery-strict-quad .quad-images img {
+  flex: 1 1 0;
+  width: 0;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.gallery-strict-quad figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  flex: 0 0 auto;
+}
+
+.quad-1 { grid-column: 2; grid-row: 1; }
+.quad-2 { grid-column: 3; grid-row: 1; }
+.quad-3 { grid-column: 2; grid-row: 2; }
+.quad-4 { grid-column: 3; grid-row: 2; }
+
+@media (max-width: 900px) {
+  .gallery-strict {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .gallery-strict-main {
+    height: auto;
+  }
+  .gallery-strict-quad .quad-images {
+    height: auto;
+  }
+  .gallery-strict-quad .quad-images img {
+    height: auto;
+  }
+}
+
+
+
+
+/* Footer / kontakt --------------------------------------------------------- */
+footer.site-footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px var(--edge) 56px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+footer.site-footer a {
+  color: var(--ink);
+  text-decoration: none;
+}
+footer.site-footer a:hover { color: var(--blue); }
+
+footer.site-footer .contact-block div { margin-bottom: 4px; font-size: 15px; }
+
+/* Lightbox — forstørret fullskjermvisning av bilder --------------------- */
+img.lightbox-img {
+  cursor: zoom-in;
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 19, 17, 0.47);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  z-index: 100;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.active {
+  display: flex;
+}
+
+.lightbox-overlay img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.lightbox-overlay .lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  color: #F6F4EE;
+  cursor: pointer;
+}
+
+
+/* Kulepunktliste inni en tidslinje-post (f.eks. institutter under utveksling) */
+.timeline-list {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timeline-list li {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-left: 16px;
+  position: relative;
+}
+
+.timeline-list li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+}
+
+
+
+.mobile-bar {
+  display: contents; /* usynlig endring på desktop */
+}
+
+.menu-toggle {
+  display: none; /* skjult på desktop */
+}
+
+@media (max-width: 760px) {
+  .mobile-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--line);
+    background: transparent;
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  nav.site-nav,
+  .sidebar-contact {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  aside.sidebar.menu-open nav.site-nav,
+  aside.sidebar.menu-open .sidebar-contact {
+    display: flex;
+  }
+
+  .sub-nav {
+    flex-direction: column !important;
+  }
+}
+
+
